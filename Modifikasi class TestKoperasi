@@ -1,0 +1,90 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Semester2;
+import java.util.Scanner;
+
+/**
+ *
+ * @author User
+ */
+public class Anggota2 {
+
+
+    private String noKtp;
+    private String nama;
+    private int limitPinjaman;
+    private int jumlahPinjaman;
+
+    public Anggota2(String noKtp, String nama, int limitPinjaman) {
+        this.noKtp = noKtp;
+        this.nama = nama;
+        this.limitPinjaman = limitPinjaman;
+        this.jumlahPinjaman = 0;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public int getLimitPinjaman() {
+        return limitPinjaman;
+    }
+
+    public int getJumlahPinjaman() {
+        return jumlahPinjaman;
+    }
+
+    public void pinjam(int jumlah) {
+        if (jumlah + jumlahPinjaman > limitPinjaman) {
+            System.out.println("Maaf, jumlah pinjaman melebihi limit.");
+        } else {
+            jumlahPinjaman += jumlah;
+        }
+    }
+
+    public void angsur(int jumlah) {
+        int minimal = jumlahPinjaman / 10;
+
+        if (jumlah < minimal) {
+            System.out.println("Maaf, angsuran harus 10% dari jumlah pinjaman");
+        } else {
+            jumlahPinjaman -= jumlah;
+            if (jumlahPinjaman < 0) {
+                jumlahPinjaman = 0;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        Anggota2 donny = new Anggota2("111333444", "Ricko", 5000000);
+
+        System.out.println("Nama Anggota: " + donny.getNama());
+        System.out.println("Limit Pinjaman: " + donny.getLimitPinjaman());
+
+        System.out.print("\nMasukkan jumlah pinjaman: ");
+        int pinjam = input.nextInt();
+        donny.pinjam(pinjam);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+
+        System.out.print("\nMasukkan jumlah pinjaman lagi: ");
+        int pinjam2 = input.nextInt();
+        donny.pinjam(pinjam2);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+
+        System.out.print("\nMasukkan jumlah angsuran: ");
+        int angsur1 = input.nextInt();
+        donny.angsur(angsur1);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+
+        System.out.print("\nMasukkan jumlah angsuran lagi: ");
+        int angsur2 = input.nextInt();
+        donny.angsur(angsur2);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+    }
+}
+
+
