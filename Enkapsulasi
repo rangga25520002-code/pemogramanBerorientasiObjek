@@ -1,0 +1,62 @@
+public class Anggota1 {
+    private String noKtp;
+    private String nama;
+    private int limitPinjaman;
+    private int jumlahPinjaman;
+
+    public Anggota1(String noKtp, String nama, int limitPinjaman) {
+        this.noKtp = noKtp;
+        this.nama = nama;
+        this.limitPinjaman = limitPinjaman;
+        this.jumlahPinjaman = 0;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public int getLimitPinjaman() {
+        return limitPinjaman;
+    }
+
+    public int getJumlahPinjaman() {
+        return jumlahPinjaman;
+    }
+
+    public void pinjam(int jumlah) {
+        if (jumlah + jumlahPinjaman > limitPinjaman) {
+            System.out.println("Maaf, jumlah pinjaman melebihi limit.");
+        } else {
+            jumlahPinjaman += jumlah;
+        }
+    }
+
+    public void angsur(int jumlah) {
+        jumlahPinjaman -= jumlah;
+        if (jumlahPinjaman < 0) {
+            jumlahPinjaman = 0;
+        }
+    }
+     public static void main(String[] args) {
+        Anggota1 donny = new Anggota1("111333444", "Ricko", 5000000);
+
+        System.out.println("Nama Anggota: " + donny.getNama());
+        System.out.println("Limit Pinjaman: " + donny.getLimitPinjaman());
+
+        System.out.println("\nMeminjam uang 10.000.000...");
+        donny.pinjam(10000000);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+
+        System.out.println("\nMeminjam uang 4.000.000...");
+        donny.pinjam(4000000);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+
+        System.out.println("\nMembayar angsuran 1.000.000");
+        donny.angsur(1000000);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+
+        System.out.println("\nMembayar angsuran 3.000.000");
+        donny.angsur(3000000);
+        System.out.println("Jumlah pinjaman saat ini: " + donny.getJumlahPinjaman());
+    }
+}
